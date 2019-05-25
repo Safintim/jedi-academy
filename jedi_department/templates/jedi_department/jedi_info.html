@@ -1,0 +1,26 @@
+{% extends 'jedi_department/base_jedi.html' %}
+{% block title %}
+Информация джедаев
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+            <h3>jedi of number padawans</h3>
+                {% for jedi, padawan in jedis_and_padawans.items %}
+                    <p>{{ jedi }} {{padawan}}</p>
+                {% endfor %}
+            <hr>
+            <h3>jedi of number padawans more than one</h3>
+                {% for jedi, padawan in jedis_and_padawans.items %}
+                    {% if padawan > 1 %}
+                        <p>{{ jedi }} {{padawan}}</p>
+                    {% endif %}
+                {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

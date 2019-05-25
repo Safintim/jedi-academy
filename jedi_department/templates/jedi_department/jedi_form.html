@@ -1,0 +1,25 @@
+{% extends 'jedai_department/base_jedai.html' %}
+{% block title %}
+Форма Джедая
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+            <h1>For Jedi</h1>
+
+            <form action="jedi_form" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ jedi_form.as_p }}
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends 'jedai_department/base_jedai.html' %}
+{% block title %}
+Список кандидатов
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+            <h1>Список ваших кандидатов ({{ planet }})</h1>
+
+            <form action="candidates" method="POST">
+                {% csrf_token %}
+                {% for candidate, answers in candidates_answers.items %}
+                <label>
+                    <input type="radio" name="candidate" value="{{candidate}}">
+                    {{candidate.name}}
+                </label>
+                    <ul class="list-group">
+                        {% for answer in answers %}
+                            <li class="list-group-item"> {{ answer.question }} {{ answer }}.</li>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                {% endfor %}
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

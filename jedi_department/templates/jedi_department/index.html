@@ -1,0 +1,18 @@
+{% extends 'jedai_department/base_jedai.html' %}
+
+{% block title %}
+Главная страница
+{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-md-center">
+      <div class="col col-md-auto">
+        <a href="{% url 'candidate_form' %}" class="btn btn-dark btn-lg active" role="button" aria-pressed="true">Candidate</a>
+      </div>
+      <div class="col col-md-auto">
+        <a href="{% url 'jedai_form' %}" class="btn btn-dark btn-lg active" role="button" aria-pressed="true">Jedi</a>
+      </div>
+    </div>
+</div>
+{% endblock content %}

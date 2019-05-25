@@ -1,0 +1,25 @@
+{% extends 'jedai_department/base_jedai.html' %}
+{% block title %}
+Форма кандидата
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+            <h1>Test №{{ test.id }} for Candidate</h1>
+            <form action="test_form" method="POST">
+                {% for question in questions %}
+                    {% csrf_token %}
+                    <div class="form-group">
+                    <h3>{{ question }}</h3>
+                        {{ test_form }}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

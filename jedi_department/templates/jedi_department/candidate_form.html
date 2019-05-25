@@ -1,0 +1,37 @@
+{% extends 'jedai_department/base_jedai.html' %}
+{% block title %}
+Форма кандидата
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+            <h1>For Candidate</h1>
+
+            <form action="candidate_form" method="POST">
+                {% csrf_token %}
+                {% for field in candidate_form %}
+
+                    <div class="form-group">
+
+                        {% if field.errors %}
+                            <div class="alert alert-danger">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+
+                        {{ field.label }}
+                        {{ field }}
+
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

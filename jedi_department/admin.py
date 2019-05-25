@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from jedi_department.models import (Candidate, Planet, Jedi,
-                                    Test, ListQuestions, Answer)
+                                    Test, ListQuestions, Answer, Padawan)
 
 
 class UserCreationForm(forms.ModelForm):
@@ -70,6 +70,9 @@ class AnswerAdmin(admin.ModelAdmin):
     list_display = ('test', 'candidate', 'text_answer', 'date_answer')
 
 
+class PadawanAdmin(admin.ModelAdmin):
+    list_display = ('jedi_id', 'candidate_id', 'active')
+
 admin.site.register(Candidate, UserAdmin)
 admin.site.unregister(Group)
 # admin.site.register(Candidate, CandidateAdmin)
@@ -78,3 +81,4 @@ admin.site.register(Jedi, JedaiAdmin)
 admin.site.register(ListQuestions, ListQuestionsAdmin)
 admin.site.register(Answer, AnswerAdmin)
 admin.site.register(Test, TestAdmin)
+admin.site.register(Padawan, PadawanAdmin)

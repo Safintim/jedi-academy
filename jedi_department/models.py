@@ -47,7 +47,6 @@ class Candidate(AbstractBaseUser):
     age = models.IntegerField()
     pass_test = models.BooleanField(default=False)
     planet = models.ForeignKey(Planet, on_delete=models.CASCADE)
-    # is_padawan = models.BooleanField(default=False)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -74,15 +73,18 @@ class Candidate(AbstractBaseUser):
 class Jedi(models.Model):
     name = models.CharField(max_length=150)
     planet = models.ForeignKey(Planet, on_delete=models.CASCADE)
-    # padawan = models.ForeignKey(Candidate, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
 
-# class Padawan(models.Model):
-#     jedi_id = models.ForeignKey(Jedi, on_delete=models.CASCADE)
-#     candidate_id = models.ForeignKey(Candidate, on_delete=models.CASCADE)
+class Padawan(models.Model):
+    jedi_id = models.ForeignKey(Jedi, on_delete=models.CASCADE)
+    candidate_id = models.ForeignKey(Candidate, on_delete=models.CASCADE, unique=True)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'jedi: {self.jedi_id}, candidate: {self.candidate_id}'
 
 
 class Test(models.Model):

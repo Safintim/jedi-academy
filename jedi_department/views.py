@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import CandidateForm, TestForm, JediForm
-from .models import ListQuestions, Answer, Jedi, Candidate, Test
+from .models import ListQuestions, Answer, Jedi, Candidate, Test, Padawan
 
 
 def index(request):
@@ -70,19 +70,25 @@ def test_form(request):
 
 
 def candidates(request):
-    name_jedi = request.session['name_jedai']
+    name_jedi = request.session['name_jedi']
+    jedi = Jedi.objects.get(name=name_jedi)
+    padawans = Padawan.objects.filter(jedi_id=jedi.pk)
     if request.method == 'POST':
         email_candidate = request.POST.get('candidate')
         candidate = Candidate.objects.get(email=email_candidate)
-        # update jedi
-        # update candidate
-        print(request.session.items())
-        print(candidate.id)
-        return HttpResponse('ok')
+        if len(padawans) < 3:
+            Padawan.objects.create(
+                jedi_id=jedi,
+                candidate_id=candidate
+            )
+            return HttpResponse('ok')
+        return HttpResponse('no ok')
     else:
+        candidates_id = [i.candidate_id.id for i in padawans]
+        planet_jedi = jedi.planet
+        candidates_planet_jedi = Candidate.objects.filter(planet=planet_jedi,
+                                                          pass_test=True).exclude(id__in=candidates_id)
 
-        planet_jedi = Jedi.objects.get(name=name_jedi).planet
-        candidates_planet_jedi = Candidate.objects.filter(planet=planet_jedi, pass_test=True)
         candidates_answers = {}
         for candidate in candidates_planet_jedi:
             candidates_answers[candidate] = Answer.objects.filter(candidate=candidate)

@@ -8,4 +8,5 @@ urlpatterns = [
     path('jedi_form', views.jedi_form, name='jedi_form'),
     path('test_form', views.test_form, name='test_form'),
     path('candidates', views.candidates, name='candidates'),
+    path('jedi_info', views.jedi_info, name='jedi_info'),
 ]

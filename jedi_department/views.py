@@ -97,3 +97,16 @@ def candidates(request):
         'planet': planet_jedi,
         'candidates_answers': candidates_answers,
     })
+
+
+def jedi_info(request):
+    if request.method == 'GET':
+        jedis = Jedi.objects.all()
+        padawans = Padawan.objects.all()
+        jedis_and_padawans = {}
+        for jedi in jedis:
+            jedis_and_padawans[jedi.name] = padawans.filter(jedi_id=jedi.id).count()
+
+        return render(request, 'jedi_department/jedi_info.html', context={
+            'jedis_and_padawans': jedis_and_padawans
+        })

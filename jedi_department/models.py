@@ -80,7 +80,7 @@ class Jedi(models.Model):
 
 class Padawan(models.Model):
     jedi_id = models.ForeignKey(Jedi, on_delete=models.CASCADE)
-    candidate_id = models.ForeignKey(Candidate, on_delete=models.CASCADE, unique=True)
+    candidate_id = models.ForeignKey(Candidate, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
 
     def __str__(self):

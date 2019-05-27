@@ -58,7 +58,7 @@ def test_form(request):
                     question=questions[i],
                     text_answer=answers[i]
                 )
-            return HttpResponse('ok')
+            return HttpResponse('<h1>Answer accepted</h1>')
     else:
         form_test = TestForm()
     
@@ -81,8 +81,8 @@ def candidates(request):
                 jedi_id=jedi,
                 candidate_id=candidate
             )
-            return HttpResponse('ok')
-        return HttpResponse('no ok')
+            return HttpResponse('<h1>Candidate enrolled</h1>')
+        return HttpResponse('<h1>You already have 3 candidates</h1>')
     else:
         candidates_id = [i.candidate_id.id for i in padawans]
         planet_jedi = jedi.planet
